@@ -8,24 +8,14 @@ import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
 import { useElementSize } from "@mantine/hooks";
 import Noresult from "./Noresult";
-// import Welcome from "../authentication/Welcome";
-// import { data } from "autoprefixer";
-// import Header from "../components/Header";
 
 const ContactList = () => {
   const token = Cookies.get("token");
   const user = JSON?.parse(Cookies.get("user"));
   const { data: content, isLoading } = useGetContentQuery(token);
   const cartItems = useSelector((state) => state.search.cartItems);
-  console.log(cartItems);
-  // console.log(content?.contacts.data);
   const search = useSelector((state) => state.search.search);
-  // const path = useSelector((state) => state.path.path);
   const dispatch = useDispatch();
-
-  // function renderContent() {
-  // dispatch()
-  // }
 
   useEffect(() => {
     dispatch(addUser(user));
@@ -40,20 +30,6 @@ const ContactList = () => {
   const filtersearch = content?.contacts.data.filter((item) => {
     return item.name.toLowerCase().includes(search);
   });
-
-  // if (
-  //   content?.contacts.data.map((item) =>
-  //     item.name.toLowerCase() !== search
-  //   ) &&
-  //   search !== ""
-  // ) {
-  //   return <Noresult />;
-  // }
-
-  // if(content?.contacts.data.find(item => item.name.toLowerCase()  ))
-  // if (filtersearch?.length === 0 && search.length > 0) {
-  //   return <Noresult />;
-  // } else
 
   if (content?.contacts.data.length === 0) {
     return (

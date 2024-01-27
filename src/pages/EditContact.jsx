@@ -48,7 +48,6 @@ const EditContact = () => {
                 notify();
                 nav("/");
               }
-              console.log(data);
             })}
             className=" w-96 p-7 flex flex-col gap-10 shadow-lg "
           >

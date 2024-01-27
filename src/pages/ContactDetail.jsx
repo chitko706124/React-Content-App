@@ -22,7 +22,6 @@ import dateFormat, { masks } from "dateformat";
 const ContactDetail = () => {
   const token = Cookies.get("token");
   const { data: content } = useGetContentQuery(token);
-  console.log(content?.contacts.data);
   const { id } = useParams();
   const { data, isLoading } = useGetContactDetailQuery({ id, token });
   const [deleteContact] = useDeleteContactMutation();
@@ -32,109 +31,31 @@ const ContactDetail = () => {
   const binContact = content?.contacts.data.filter(
     (item) => item.id === parseInt(id)
   );
-  console.log(binContact);
   useEffect(() => {
     {
       isLoading ? dispatch(addPath("")) : dispatch(addPath("contactList"));
     }
   });
 
-  // const bin = JSON?.parse(Cookies.get("bin"));
-  // console.log(bin);
+
 
   const notify = () => toast.error("Content is deleted");
 
   const deleteHandler = async () => {
     const data = await deleteContact({ id, token });
-    console.log(data);
-    // dispatch(addBin(data));
     if (data?.data?.success) {
-      //  dispatch(addBin(binContact));
       dispatch(addToCart(binContact));
       notify();
       nav("/");
     }
-    // console.log(data);
   };
 
-  //   console.log(data);
   return (
     <>
       {isLoading ? (
         <Loading />
       ) : (
-        // <div>
-        //   <div className="my-5 grid grid-cols-12 grid-rows-4 gap-1">
-        //     <div className=" row-start-1 row-end-2 col-start-2 lg:col-start-2 ">
-        //       <Link to={"/"}>
-        //         <button>
-        //           <AiOutlineLeft className=" text-2xl" />
-        //         </button>
-        //       </Link>
-        //     </div>
-        //     <div className="col-start-5 col-span-4 md:col-start-2 row-span-4 md:col-span-4 md:row-span-4 flex flex-wrap md:flex-nowrap justify-center align-middle items-center gap-10">
-        //       {/* <img
-        //         src={
-        //           data?.contact?.photo === null
-        //             ? "https://img.favpng.com/17/1/20/user-interface-design-computer-icons-default-png-favpng-A0tt8aVzdqP30RjwFGhjNABpm.jpg"
-        //             : data?.contact?.photo
-        //         }
-        //         width={"150px"}
-        //         className=" rounded-full"
-        //       />
-        //       <div className=" flex flex-col">
-        //         <p className=" text-2xl">{data?.contact?.name}</p>
-        //         <p className=" text-md text-gray-500">{data?.contact?.phone}</p>
-        //       </div> */}
-        //     </div>
-        //     <div className="col-start-11 col-span-2 row-start-1 row-span-2 md:col-start-11 md:col-span-4 md:row-start-1 md:row-span-2">
-        //       <Menu width={150}>
-        //         <Menu.Target>
-        //           <Button variant="">
-        //             <BsThreeDotsVertical size={20} />
-        //           </Button>
-        //         </Menu.Target>
-
-        //         <Menu.Dropdown>
-        //           <Link to={`/edit/${id}`}>
-        //             <Menu.Item target="_blank">
-        //               <p className=" cursor-pointer text-center">Edit User</p>
-        //             </Menu.Item>
-        //           </Link>
-
-        //           <Menu.Item>
-        //             <p
-        //               className=" cursor-pointer text-red-500 text-center"
-        //               onClick={() => deleteHandler(id)}
-        //             >
-        //               Delete User
-        //             </p>
-        //           </Menu.Item>
-        //         </Menu.Dropdown>
-        //       </Menu>
-        //     </div>
-        //   </div>
-
-        //   {/* <div className=" grid grid-cols-12 gap-0 my-5"> */}
-        //     {/* <div className=" col-start-2 col-span-10 md:col-start-2 md:col-span-4 lg:col-start-3 lg:col-span-3 border-2 border-black rounded-lg p-5">
-        //       <h4 className=" text-lg">User Details</h4>
-        //       <hr />
-        //       <p>
-        //         Email :{" "}
-        //         {data?.contact?.email === null
-        //           ? "example@gmail.com"
-        //           : data?.contact?.email}
-        //       </p>
-        //       <p>Phone : {data?.contact?.phone}</p>
-        //       <p>
-        //         Address :{" "}
-        //         {data?.contact?.address === null
-        //           ? "Bahan TownShip"
-        //           : data?.contact?.address}
-        //       </p>
-        //     </div> */}
-        //   {/* </div> */}
-        // </div>
+     
         <div className=" flex justify-center my-20">
           <div className="max-w-sm flex gap-3 flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div className=" flex justify-end">
@@ -165,11 +86,7 @@ const ContactDetail = () => {
 
             <a href="#">
               <div className=" flex justify-center mt-6">
-                {/* {data?.contact?.photo === null ? (
-                  <div className=" text-6xl font-bold bg-orange-400 text-white rounded-full p-8">{data?.contact?.name.substring(0, 1)}</div>
-                ) : (
-                  <div>{data?.contact?.photo}</div>
-                )} */}
+            
 
                 <img
                   src={
@@ -208,46 +125,7 @@ const ContactDetail = () => {
                   {dateFormat(data?.contact?.created_at, "h:MM TT")}
                 </p>
               </div>
-              {/* <div className=" flex items-center gap-3">
-                <Link
-                  to={`/edit/${id}`}
-                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Edit
-                  <svg
-                    aria-hidden="true"
-                    className="w-4 h-4 ml-2 -mr-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </Link>
-                <button
-                  onClick={() => deleteHandler(id)}
-                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Delete
-                  <svg
-                    aria-hidden="true"
-                    className="w-4 h-4 ml-2 -mr-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </button>
-              </div> */}
+           
               <Link to={"/"}>
                 <Button
                   className=" w-full"

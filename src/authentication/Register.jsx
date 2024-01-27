@@ -68,7 +68,6 @@ const Register = () => {
                   navigate(`/login`);
                 }
                 if(data?.errors){
-                  console.log(data?.errors);
                   errorMsg(data?.errors?.email,data?.errors?.password);
                 }
               })
@@ -76,16 +75,7 @@ const Register = () => {
                 console.error('Error:', error);
               });
 
-              // try {
-              //   const { data } = await register(values);
-              //   console.log(data);
-              //   if (data?.success) {
-              //     notify();
-              //     navigate(`/login`);
-              //   }
-              // }catch (e) {
-              //   console.log(e);
-              // }
+        
             })}
             action=""
             className=" lg:w-[450px]  sm:w-[500px]  w-[calc(100%-10%)]"

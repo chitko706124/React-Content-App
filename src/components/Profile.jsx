@@ -12,14 +12,8 @@ import { parse } from "postcss";
 
 const Profile = () => {
   const token = Cookies?.get("token");
-  // const user = JSON?.parse(Cookies.get("user"));
-  // let user = token ? JSON?parse(Cookies.get("user")) : "" ;
-  //   if (token) {
-  //     let user = JSON?.parse(Cookies.get("user"));
-  //   }
 
   const user = useSelector((state) => state.search.user);
-  console.log(user);
   const nav = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,7 +23,6 @@ const Profile = () => {
     const { data } = await logout(token);
     dispatch(removeUser());
     if (data?.success) nav("/login");
-    console.log(data);
   };
   return (
     <div className="  rounded-full">

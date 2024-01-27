@@ -14,18 +14,11 @@ import ContactDetail from "./pages/ContactDetail";
 import EditContact from "./pages/EditContact";
 import Trash from "./pages/Trash";
 import Welcome from "./authentication/Welcome";
-// import ContactList from './pages/ContactList';
 const App = () => {
   const path = useSelector((state) => state.search.path);
-  console.log(path);
-  // function renderContent() {
-  //   if (path === "contactList") {
-  //     return <Header />;
-  //   }
-  // }
+
   return (
     <>
-      {/* {renderContent()} */}
       <Header />
       <Toaster position="top-right" reverseOrder={false} />
       <Routes>
@@ -48,10 +41,38 @@ const App = () => {
         />
 
         <Route path="/register" element={<Register />} />
-        <Route path="/create" element={<RouteGuard><CreateContact /></RouteGuard>} />
-        <Route path="/detail/:id" element={<RouteGuard><ContactDetail /></RouteGuard>} />
-        <Route path="/edit/:id" element={<RouteGuard><EditContact /></RouteGuard>} />
-        <Route path="/trash" element={<RouteGuard><Trash /></RouteGuard>} />
+        <Route
+          path="/create"
+          element={
+            <RouteGuard>
+              <CreateContact />
+            </RouteGuard>
+          }
+        />
+        <Route
+          path="/detail/:id"
+          element={
+            <RouteGuard>
+              <ContactDetail />
+            </RouteGuard>
+          }
+        />
+        <Route
+          path="/edit/:id"
+          element={
+            <RouteGuard>
+              <EditContact />
+            </RouteGuard>
+          }
+        />
+        <Route
+          path="/trash"
+          element={
+            <RouteGuard>
+              <Trash />
+            </RouteGuard>
+          }
+        />
       </Routes>
     </>
   );
