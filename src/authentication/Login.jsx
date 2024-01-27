@@ -9,13 +9,15 @@ import { addUser } from "../services/authSlice";
 import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 
+import contact from "../assets/contact.svg";
+import robot from "../assets/robot.svg";
+
 const Login = () => {
   // const datas = useSelector((state) => state.auth);
 
   const notify = () => toast.success("Logined");
   const errorMsg = (msg) => toast.error(`${msg}`);
   const token = Cookies.get("token");
-
 
   const form = useForm({
     initialValues: {
@@ -36,13 +38,13 @@ const Login = () => {
   return (
     <div>
       <div className={token ? "hidden" : "mt-5 ml-5 flex gap-3"}>
-        <img src="/src/assets/contact.svg" className=" w-[30px]" alt="" />
+        <img src={contact} className=" w-[30px]" alt="" />
         <p className=" font-bold text-slate-400 text-2xl">Contacts</p>
       </div>
       <div className="flex   lg:flex-row flex-col-reverse lg:gap-3  items-center justify-evenly mt-10">
         <div className="">
           <img
-            src='src/assets/robot.svg'
+            src={robot}
             alt=""
             className=" w-[600px] h-[40vh] sm:h-[50vh] md:h-[70vh] object-contain transition-all hover:translate-x-5"
           />
@@ -52,13 +54,13 @@ const Login = () => {
           onSubmit={form.onSubmit(async (values) => {
             try {
               const { data } = await login(values);
-              
+
               if (data?.success) {
                 dispatch(addUser({ user: data?.user, token: data?.token }));
                 notify();
                 nav(`/welcome`);
-              }else {
-                errorMsg(data?.message)
+              } else {
+                errorMsg(data?.message);
               }
             } catch (error) {
               console.log(error);
@@ -66,19 +68,16 @@ const Login = () => {
           })}
         >
           <div className=" bg-white shadow-lg p-5 flex flex-col gap-3">
-            <p className=" text-2xl mb-5 font-bold">
-              Login Your Account
-            </p>
-            
-           <div>
-            <p className=" font-bold text-gray-500">Email</p>
-           <TextInput
-             
-             placeholder="Enter your email"
-             description="Put your email in a box "
-             {...form.getInputProps("email")}
-           />
-           </div>
+            <p className=" text-2xl mb-5 font-bold">Login Your Account</p>
+
+            <div>
+              <p className=" font-bold text-gray-500">Email</p>
+              <TextInput
+                placeholder="Enter your email"
+                description="Put your email in a box "
+                {...form.getInputProps("email")}
+              />
+            </div>
             <div>
               <p className=" font-bold text-gray-500">Password</p>
               <PasswordInput
@@ -103,8 +102,6 @@ const Login = () => {
           </div>
         </form>
       </div>
-
-   
     </div>
   );
 };

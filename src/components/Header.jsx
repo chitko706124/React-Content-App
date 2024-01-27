@@ -14,6 +14,11 @@ import { FcFullTrash } from "react-icons/fc";
 import { VscSignIn } from "react-icons/vsc";
 import { SlNote } from "react-icons/sl";
 
+import contact from "../assets/contact.svg";
+import create_contact from "../assets/create-contact.svg";
+import logout from "../assets/logout.svg";
+import signUp from "../assets/signup.svg";
+
 const Header = () => {
   // const user = JSON.parse(Cookies.get("user"));
   const token = Cookies.get("token");
@@ -54,7 +59,7 @@ const Header = () => {
             <HiMenuAlt2 />
           </button>
           <div className=" flex items-center gap-3 w-auto h-7">
-            <img src="/src/assets/contact.svg" className=" w-7 h-8" alt="" />
+            <img src={contact} className=" w-7 h-8" alt="" />
             <p className=" font-bold text-xl text-slate-400 hidden md:block">
               Contacts
             </p>
@@ -148,7 +153,7 @@ const Header = () => {
               >
                 <img
                   className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  src="src/assets/create-contact.svg"
+                  src={create_contact}
                   alt=""
                 />
                 <span className="ml-3">Create Contact</span>
@@ -214,7 +219,7 @@ const Header = () => {
                 className="flex items-center p-2 text-gray-900 rounded-md dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <img
-                  src="src/assets/logout.svg"
+                  src={logout}
                   className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                   alt=""
                 />
@@ -236,7 +241,7 @@ const Header = () => {
                 className="flex items-center p-2 text-gray-900 rounded-md dark:text-white hover:bg-gray-100 `dark:hover:bg-gray-700"
               >
                 <img
-                  src="src/assets/signup.svg"
+                  src={signUp}
                   className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                   alt=""
                 />

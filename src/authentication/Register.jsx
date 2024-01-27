@@ -5,6 +5,8 @@ import { useRegisterMutation } from "../services/api/authApi";
 import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 
+import contact from "../assets/contact.svg";
+
 const token = Cookies.get("token");
 
 const Register = () => {
@@ -29,7 +31,10 @@ const Register = () => {
   });
 
   const notify = (msg) => toast.success(`${msg}`);
-  const errorMsg = (error,pass = null) => toast.error(`${error} ${pass !== null ? pass[0] : ''} ${pass !== null ? pass[1] : ''}`);
+  const errorMsg = (error, pass = null) =>
+    toast.error(
+      `${error} ${pass !== null ? pass[0] : ""} ${pass !== null ? pass[1] : ""}`
+    );
 
   const [register] = useRegisterMutation();
   const navigate = useNavigate();
@@ -37,45 +42,40 @@ const Register = () => {
     <div className=" ">
       <div>
         <div className={token ? "hidden" : "mt-5 ml-5 flex gap-3"}>
-          <img src="/src/assets/contact.svg" className=" w-[30px]" alt="" />
+          <img src={contact} className=" w-[30px]" alt="" />
           <p className=" font-bold text-slate-400 text-2xl">Contacts</p>
         </div>
         <div className="flex   lg:flex-row flex-col-reverse lg:gap-3  items-center justify-evenly mt-10">
           <div className="">
             <img
-              src=" https://img.freepik.com/premium-vector/cartoon-hand-using-smartphone-cellphone-screen-scrolling-flat-vector-illustration_627510-561.jpg?w=2000"
+              src="https://img.freepik.com/premium-vector/cartoon-hand-using-smartphone-cellphone-screen-scrolling-flat-vector-illustration_627510-561.jpg?w=2000"
               alt=""
               className=" w-[500px] h-[80vh] object-contain transition-all hover:translate-x-5"
             />
           </div>
           <form
             onSubmit={form.onSubmit((values) => {
-
-
-              fetch('https://contact-app.mmsdev.site/api/v1/register', {
-                method: 'POST',
+              fetch("https://contact-app.mmsdev.site/api/v1/register", {
+                method: "POST",
                 headers: {
-                  'content-type': 'application/json',
-                  'accept': 'application/json',
-                  
+                  "content-type": "application/json",
+                  accept: "application/json",
                 },
-                body: JSON.stringify(values)
+                body: JSON.stringify(values),
               })
-              .then(response => response.json())
-              .then(data => {
-                if (data?.success) {
-                  notify(data?.message);
-                  navigate(`/login`);
-                }
-                if(data?.errors){
-                  errorMsg(data?.errors?.email,data?.errors?.password);
-                }
-              })
-              .catch((error) => {
-                console.error('Error:', error);
-              });
-
-        
+                .then((response) => response.json())
+                .then((data) => {
+                  if (data?.success) {
+                    notify(data?.message);
+                    navigate(`/login`);
+                  }
+                  if (data?.errors) {
+                    errorMsg(data?.errors?.email, data?.errors?.password);
+                  }
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
             })}
             action=""
             className=" lg:w-[450px]  sm:w-[500px]  w-[calc(100%-10%)]"
