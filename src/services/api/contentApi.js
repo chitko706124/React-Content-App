@@ -5,7 +5,7 @@ export const contentApi = createApi({
   reducerPath: "contentApi",
   tagTypes: ["auth"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://contact-app.mmsdev.site/api/v1",
+    baseUrl: "https://contact.sankyitar.store/api/v1",
   }),
   endpoints: (builder) => ({
     getContent: builder.query({
@@ -38,7 +38,7 @@ export const contentApi = createApi({
         headers: { authorization: `Bearer ${token}` },
         body: content,
       }),
-      invalidatesTags: ["auth",'contact'],
+      invalidatesTags: ["auth", "contact"],
     }),
     deleteContact: builder.mutation({
       query: ({ id, token }) => ({

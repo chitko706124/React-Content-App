@@ -55,7 +55,7 @@ const Register = () => {
           </div>
           <form
             onSubmit={form.onSubmit((values) => {
-              fetch("https://contact-app.mmsdev.site/api/v1/register", {
+              fetch("https://contact.sankyitar.store/api/v1/register", {
                 method: "POST",
                 headers: {
                   "content-type": "application/json",
